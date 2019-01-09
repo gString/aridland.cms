@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Projects = () => (
-    <div>Projects</div>
+    <div>Projects<br/>
+    </div>
 );
 
 Projects.propTypes = {

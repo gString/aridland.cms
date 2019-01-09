@@ -27,6 +27,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "lorem-ipsum": "^1.0.6"
+    "lorem-ipsum": "^1.0.6",
+    "uniqid": "^5.0.3"
   }
 }
