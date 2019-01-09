@@ -1,4 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-ReactDOM.render(<App />, document.getElementById('js-root'));
+import CMSapp from "./CMSapp";
+
+ReactDOM.render(<CMSapp />, document.getElementById('js-root'));
