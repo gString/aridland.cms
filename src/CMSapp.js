@@ -1,11 +1,12 @@
 import React from 'react';
-import Projects from "./view/Projects";
 import { Switch, Route } from 'react-router-dom';
+
+import ProjectPage from "./view/ProjectPage";
 
 const CMSapp = () =>
     <main>
         <Switch>
-            <Route exact path='/' component={Projects}/>
+            <Route exact path='/' component={ProjectPage}/>
         </Switch>
     </main>
 
