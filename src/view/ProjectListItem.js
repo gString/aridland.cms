@@ -1,18 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {selectProject} from "../model/actions";
+import {connect} from "react-redux";
 
-const ProjectListItem = props => {
-    const handleClick = () => {
-        props.clickHandler(props.class);
-    };
+const ProjectListItem = ({ handleClick, item }) => {
     return (
-        <button title={props.text}
-                className={props.class}
-                onClick={handleClick}>
-            {props.item.head.ENG}
+        <button onClick={() => handleClick(item.id)}>
+            {item.head.ENG}
         </button>
     )
 };
+
+const mapDispatchToProps = dispatch => {
+    return {
+        handleClick: id => dispatch(selectProject(id))
+    }
+}
 
 ProjectListItem.propTypes = {
     'item': PropTypes.object,
@@ -20,4 +23,7 @@ ProjectListItem.propTypes = {
     'clickHandler': PropTypes.func
 };
 
-export default ProjectListItem;
+export default connect(
+    undefined,
+    mapDispatchToProps
+)(ProjectListItem);
