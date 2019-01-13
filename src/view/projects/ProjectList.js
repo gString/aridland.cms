@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from "react-redux";
+
+import {projectsSelector} from "../../model/selectors";
 import ProjectListItem from "./ProjectListItem";
 
 const ProjectList = ({projects}) => {
@@ -8,6 +11,7 @@ const ProjectList = ({projects}) => {
         props.clickHandler(props.class);
     };
 */
+    console.log('projects',projects);
     return (
         <ul>{
             Object.keys(projects).map( key => <li key={key}><ProjectListItem item={projects[key]}/></li> )
@@ -21,4 +25,12 @@ ProjectList.propTypes = {
     'clickHandler': PropTypes.func
 };
 
-export default ProjectList;
+const mapStateToProps = state => {
+    return {
+        projects: projectsSelector(state)
+    }
+};
+
+export default connect(
+    mapStateToProps,
+)(ProjectList);

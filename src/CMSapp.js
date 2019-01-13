@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import ProjectPage from "./view/ProjectPage";
+import ProjectPage from "./view/projects/ProjectPage";
 
 const CMSapp = () =>
     <main>
