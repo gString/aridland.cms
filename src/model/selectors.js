@@ -22,9 +22,15 @@ export const noProjectsYetSelector = createSelector(
 );
 
 const getCountries = state => state.countries;
-export const coutriesSelector = createSelector(
+export const countriesSelector = createSelector(
     getCountries,
     countries => countries.items
+);
+export const countriesAsArraySelector = createSelector(
+    getCountries,
+    countries => {
+        return Object.keys(countries.items).map( key => countries.items[key]);
+    }
 );
 
 export const noCountriesYetSelector = createSelector(
