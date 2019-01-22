@@ -1,21 +1,21 @@
 import * as types from "./actionTypes";
-import {getAllProjects} from "./ProjectsStoreFake";
+import {getAllProjects} from "../fakeServer/ProjectsStoreFake";
 
 export const selectProject = projectID => ({
     type: types.SELECT_PROJECT,
     projectID
 });
 
-export const getProjects = () => ({
+const getProjects = () => ({
     type: types.REQUEST_PROJECTS,
 });
 
-export const loadDataError = (error) => ({
+const loadProjectsError = (error) => ({
     type: types.FAILED_PROJECTS,
     error
 });
 
-export const fetchDataSuccess = (items) => ({
+const fetchProjectsSuccess = (items) => ({
     type: types.RECEIVE_PROJECTS,
     items
 });
@@ -25,10 +25,10 @@ export const fetchProjects = () => async dispatch => {
     try {
         dispatch(getProjects());
         const response = await getAllProjects();
-        dispatch(fetchDataSuccess(response.json));
+        dispatch(fetchProjectsSuccess(response.json));
     } catch(err) {
         console.error(err);
-        dispatch(loadDataError(err));
+        dispatch(loadProjectsError(err));
     }
 }
 

@@ -52,6 +52,14 @@ const articleMaker = () => {
     return list;
 };
 
+const arrayMaker = ({ length, type }) => {
+    let arr = [];
+    for ( let n = 0; n < length; n++) {
+        arr.push( fieldContent(type) );
+    }
+    return arr;
+}
+
 const fieldContent = ( type, id ) => {
     switch (type.toString()) {
         case 'header':
@@ -65,13 +73,18 @@ const fieldContent = ( type, id ) => {
 const singleEntryMaker = ( configObj, id ) => {
     const entry = {};
     for (const key in configObj) {
-        entry[key] = fieldContent( configObj[key], id );
+        let value = configObj[key];
+        if (typeof value === 'object' && value !== null) {
+            entry[key] = arrayMaker(value);
+        } else {
+            entry[key] = fieldContent(configObj[key], id);
+        }
     }
     return entry;
 };
 
-const dataFaker = (minLength, lenghtRange, configObject ) => {
-    const length = randomLength(lenghtRange, minLength);
+const dataFaker = ( minLength, lengthRange, configObject ) => {
+    const length = randomLength(lengthRange, minLength);
     let data = {};
     for ( let i = 0; i < length; i++ ) {
         const id = uniqid();

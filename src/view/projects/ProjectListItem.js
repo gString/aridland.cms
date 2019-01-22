@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {selectProject} from "../../model/actions";
+import {selectProject} from "../../model/actions/projects.actions";
 import {connect} from "react-redux";
 
 const ProjectListItem = ({ handleClick, item }) => {
     return (
         <button onClick={() => handleClick(item.id)}>
-            {item.head.ENG}
+            {item.name.ENG}
         </button>
     )
 };
