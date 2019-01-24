@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import ProjectList from "./ProjectList";
 import {connect} from "react-redux";
 import {noCountriesYetSelector, noProjectsYetSelector} from "../../model/selectors";
-import ProjectEdit from "./form/ProjectEdit";
+import EnhancedProjectForm from "./form/ProjectEdit";
 
 class ProjectPage extends Component {
 
@@ -19,7 +19,7 @@ class ProjectPage extends Component {
             <div>
                 <p>Currently: </p>
                 <ProjectList />
-                <ProjectEdit />
+                <EnhancedProjectForm />
             </div>
         );
     }

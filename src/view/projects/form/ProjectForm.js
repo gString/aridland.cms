@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {Formik, Form, Field, FieldArray } from "formik";
 import Yup from 'yup';
 
-import {countriesSelector, currentProject, projectsSelector} from "../../../model/selectors";
+import {currentProject, projectsSelector} from "../../../model/selectors";
 import TextField from "../../forms-parts/TextField";
 
 const ProjectForm = () => {
@@ -108,8 +108,7 @@ const ProjectForm = () => {
 
 const mapStateToProps = state => {
     return {
-        project: currentProject(state),
-        countries: countriesSelector(state)
+        project: currentProject(state)
     }
 };
 

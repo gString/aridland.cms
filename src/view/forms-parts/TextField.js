@@ -7,7 +7,7 @@ const TextField = ({ field, form, placeholder, label=null, element = false, erro
 
         { label && <p>{label}</p>}
         <Field
-            type={element ? 'textarea' : 'text'}
+            type={element ? element : 'text'}
             component={element || undefined}
             name={field.name}
             className={cssClass || ''}

@@ -1,14 +1,14 @@
 import React from 'react';
-import { withFormik, Form, Field } from "formik";
+import {withFormik, Form, Field, FieldArray} from "formik";
 import * as Yup from 'yup';
-import { compose } from "recompose";
+import {compose} from "recompose";
 
 import TextField from "../../forms-parts/TextField";
 import DropDown from "../../forms-parts/DropDown";
 import {connect} from "react-redux";
 import {countriesAsArraySelector, currentProject} from "../../../model/selectors";
-
-
+import TextList from "../../../bu/TextList";
+import InputList from "../../forms-parts/InputList";
 
 
 const mapStateToProps = state => {
@@ -73,7 +73,7 @@ const enhanced = compose(
 );
 
 const ProjectEdit = enhanced(({
-    countries,
+                                  countries,
                                   values,
                                   errors,
                                   touched,
@@ -81,28 +81,32 @@ const ProjectEdit = enhanced(({
                               }) => {
     console.log('countries', countries);
     return (
-    <Form>
-        <Field
-            name='name'
-            component={TextField}
-            placeholder='placeholder'
-            label='Project Name'
-        />
-        <Field
-            name='size'
-            component={TextField}
-            placeholder='3000'
-            label='Size'
-            element='textarea'
-        />
-        <Field
-            name='country'
-            component={DropDown}
-            list={countries}
-            label='Country'
-        />
-    </Form>
-)});
+        <Form>
+            <Field
+                name='name'
+                component={TextField}
+                placeholder='placeholder'
+                label='Project Name'
+            />
+            <Field
+                name='country'
+                component={DropDown}
+                list={countries}
+                label='Country'
+            />
+            <InputList
+                name='rules'
+                label='Rules'
+            />
+            <Field
+                name='size'
+                component={TextField}
+                placeholder='3000'
+                label='Size'
+            />
+        </Form>
+    )
+});
 
 
 export default ProjectEdit;
