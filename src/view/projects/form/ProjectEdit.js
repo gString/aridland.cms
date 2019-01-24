@@ -104,6 +104,16 @@ const ProjectEdit = enhanced(({
                 placeholder='3000'
                 label='Size'
             />
+            <InputList
+                name='intro'
+                label='Short Introduction'
+                element='textarea'
+            />
+            <InputList
+                name='description'
+                label='Detailed Description'
+                element='textarea'
+            />
         </Form>
     )
 });
