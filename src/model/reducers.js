@@ -1,10 +1,10 @@
 import {combineReducers} from "redux";
 import * as types from "./actions/actionTypes";
 
-const selected = (state = { project:'dah'}, action) => {
+const selected = (state = { projectID:'' }, action) => {
     switch (action.type) {
         case types.SELECT_PROJECT:
-            return Object.assign(state, {project: action.projectID});
+            return Object.assign({}, state, {projectID: action.projectID});
         default: return state;
     }
 };

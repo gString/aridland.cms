@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 // import PropTypes from 'prop-types';
 import ProjectList from "./ProjectList";
 import {connect} from "react-redux";
-import {noCountriesYetSelector, noProjectsYetSelector} from "../../model/selectors";
-import EnhancedProjectForm from "./form/ProjectEdit";
+import {currentProjectSelector, noCountriesYetSelector, noProjectsYetSelector} from "../../model/selectors";
+import EnhancedProjectForm from "./ProjectEditForm";
 
 class ProjectPage extends Component {
 
@@ -15,11 +15,12 @@ class ProjectPage extends Component {
     }
 
     render() {
+        console.log('this.props',this.props)
         return (
             <div>
                 <p>Currently: </p>
                 <ProjectList />
-                <EnhancedProjectForm />
+                <EnhancedProjectForm project={this.props.selectedProject} />
             </div>
         );
     }
@@ -28,7 +29,8 @@ class ProjectPage extends Component {
 const mapStateToProps = state => {
     return {
         noProjects: noProjectsYetSelector(state),
-        noCountries: noCountriesYetSelector(state)
+        noCountries: noCountriesYetSelector(state),
+        selectedProject: currentProjectSelector(state)
     }
 }
 

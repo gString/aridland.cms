@@ -1,14 +1,14 @@
 import {createSelector} from "reselect";
 import {isObjEmpty} from "../utils";
 
-const getCurrentProject = state => state.selected.project;
+const getCurrentProject = state => state.selected.projectID;
 const getProjects = state => state.projects;
 
-export const currentProject = createSelector(
+export const currentProjectSelector = createSelector(
     getCurrentProject,
     getProjects,
     (projectID, projects) => {
-        return projects[projectID];
+        return projects.items[projectID];
     }
 );
 export const projectsSelector = createSelector(

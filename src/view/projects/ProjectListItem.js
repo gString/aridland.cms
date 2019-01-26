@@ -6,7 +6,7 @@ import {connect} from "react-redux";
 const ProjectListItem = ({ handleClick, item }) => {
     return (
         <button onClick={() => handleClick(item.id)}>
-            {item.name.ENG}
+            {item.name.ENG} - {item.id}
         </button>
     )
 };
