@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field } from "formik";
 
-const TextField = ({ field, form, placeholder, label=null, element = false, error, area, disable, cssClass }) => {
+const TextField = ({ field, form, placeholder, values, label=null, element = false, error, area, disable, cssClass }) => {
     console.log('props', { field, form, label, error, disable, cssClass });
     return <label>
 
@@ -12,6 +12,7 @@ const TextField = ({ field, form, placeholder, label=null, element = false, erro
             name={field.name}
             className={cssClass || ''}
             placeholder={placeholder || ''}
+            /*value={values}*/
         />
         { error && <p>{error}</p>}
 

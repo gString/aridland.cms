@@ -10,21 +10,26 @@ const itemDescription = element => {
     }
 };
 
-const InputList = ({formik, name, label, element, placeholder, cssClass}) =>
+const InputList = ({formik, name, lang, label, element, placeholder, cssClass}) =>
 <FieldArray
     name={name}
-        render={ arrayHelpers => (
+        render={ arrayHelpers => {
+            // const target = formik.values[name][lang];
+            return (
 
             <fieldset>
-                <legend>{label}</legend>
-                {formik.values[name] && formik.values[name].length > 0 ? (
-                    formik.values[name].map((rule, index) => (
+                <legend>{label} / {element}</legend>
+
+                {/*<p>{JSON.stringify(arrayHelpers)}</p>*/}
+                <p>{JSON.stringify(arrayHelpers)}</p>
+                {formik.values[name][lang] && formik.values[name][lang].length > 0 ? (
+                    formik.values[name][lang].map((rule, index) => (
                         <div key={index}>
                             <p>{element}</p>
                             <Field
                                 type={element ? element : 'text'}
                                 component={element || undefined}
-                                name={`${name}.${index}`}
+                                name={`${name}.${lang}.${index}`}
                                 className={cssClass || ''}
                                 placeholder={placeholder || `New ${itemDescription(element)}`}
                             />
@@ -33,10 +38,10 @@ const InputList = ({formik, name, label, element, placeholder, cssClass}) =>
                                 onClick={() => arrayHelpers.remove(index)}
                             >Delete</button>
                             {
-                                index === (formik.values[name].length - 1) ? (<button
+                                index === (formik.values[name][lang].length - 1) ? (<button
                                     type='button'
                                     onClick={() => arrayHelpers.push('')}
-                                    disabled={formik.values[name][index].length < 3}
+                                    disabled={formik.values[name][lang][index].length < 3}
                                 >{'Add another '+itemDescription(element)}</button>) : null
                             }
                         </div>)
@@ -48,7 +53,7 @@ const InputList = ({formik, name, label, element, placeholder, cssClass}) =>
                 )}
             </fieldset>
 
-        )}
+        )}}
     />
 
 export default connect(InputList);

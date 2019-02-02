@@ -29,57 +29,48 @@ const randomLength = (range, min) => {
     return Math.round(Math.random() * range) + min;
 };
 
-const headerMaker = () => {
-    return {
-        ENG: `${heading()}`,
-        SPA: `ES ${heading()}`
-    }
-};
-
-const paragraphMaker = () => {
-    return {
-        ENG: `${paragraph()}`,
-        SPA: `ES ${paragraph()}`
-    }
-};
-
-const articleMaker = () => {
-    const length = randomLength(7, 1);
-    let list = [];
-    for ( let i = 0; i < length; i++ ) {
-        list.push( paragraphMaker() );
-    }
-    return list;
-};
-
-const arrayMaker = ({ length, type }) => {
-    let arr = [];
-    for ( let n = 0; n < length; n++) {
-        arr.push( fieldContent(type) );
-    }
-    return arr;
-}
-
-const fieldContent = ( type, id ) => {
+// check for the actual content type
+const contentMaker = (type, id, lang) => {
+    const prefix = lang === 'SPA' ? 'ES ' : '';
     switch (type.toString()) {
         case 'header':
-            return headerMaker();
+            return prefix + heading();
         case 'text':
-            return articleMaker();
+            return prefix + paragraph();
         case 'id':
             return id;
-}};
+    }
+}
 
-const singleEntryMaker = ( configObj, id ) => {
+// is it array of data (multi paragraph)?
+const fieldContent = (type, id, lang, array) => {
+    if (array) {
+        let arr = [];
+        for ( let n = 0; n < array; n++) {
+            arr.push( contentMaker(type, id, lang) );
+        }
+        return arr;
+    }
+    return contentMaker(type, id, lang)
+}
+
+// Do I need language-specific data?
+const fieldMaker = (fieldConfig, id) => {
+    const { single, type, array } = fieldConfig;
+    if ( single ) return fieldContent(type, id, null, array);
+    return {
+        ENG: fieldContent(type, id, null, array),
+        SPA: fieldContent(type, id, 'SPA', array)
+    }
+}
+
+// single data entry
+const entryMaker = ( configObj, id ) => {
     const entry = {};
     for (const key in configObj) {
-        let value = configObj[key];
-        if (typeof value === 'object' && value !== null) {
-            entry[key] = arrayMaker(value);
-        } else {
-            entry[key] = fieldContent(configObj[key], id);
-        }
+        entry[key] = fieldMaker(configObj[key], id);
     }
+    console.log('entry',JSON.stringify(entry))
     return entry;
 };
 
@@ -88,8 +79,9 @@ const dataFaker = ( minLength, lengthRange, configObject ) => {
     let data = {};
     for ( let i = 0; i < length; i++ ) {
         const id = uniqid();
-        data[id] = singleEntryMaker(configObject, id);
+        data[id] = entryMaker(configObject, id);
     }
+    console.log('data',data)
     return data;
 };
 

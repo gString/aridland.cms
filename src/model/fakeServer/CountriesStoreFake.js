@@ -6,8 +6,8 @@ let countries;
 const countriesInit = () => {
 
     const dataSchema = {
-        id: 'id',
-        name: 'header',
+        id: {type: 'id', single: true},
+        name: {type: 'header'}
     }
 
     countries = dataFaker(5, 3, dataSchema);

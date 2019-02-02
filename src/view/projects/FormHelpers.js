@@ -4,27 +4,45 @@ export const formInitValues = project => {
     console.log('formInitValues', project)
     if (project) {
         return ({
-            name: project.name || '',
-            province: project.province || [],
-            country: project.country || [],
-            rules: project.rules || [],
-            size: project.size || '',
-            intro: project.intro || [],
-            description: project.description || [],
+            name: {
+                ENG: project.name.ENG || '',
+                SPA: project.name.SPA || '',
+            } ,
+            size: {
+                ENG: project.size.ENG || '',
+                SPA: project.size.SPA || '',
+            } ,
+            province: {
+                ENG: project.province.ENG || '',
+                SPA: project.province.SPA || '',
+            } ,
+            country: project.country || '',
+            rules: {
+                ENG: project.rules.ENG || [],
+                SPA: project.rules.SPA || [],
+            } ,
+            intro: {
+                ENG: project.intro.ENG || [],
+                SPA: project.intro.SPA || [],
+            } ,
+            description: {
+                ENG: project.description.ENG || [],
+                SPA: project.description.SPA || [],
+            } ,
             gallery: project.gallery || [],
-            media: project.media || []
+            media: project.media.ENG || [],
         })
     } else {
         return ({
-            name: '',
-            province: [],
-            country: [],
-            rules: [],
-            size: '',
-            intro: [],
-            description: [],
+            name: {ENG: '', SPA: ''},
+            province: {ENG: '', SPA: ''},
+            country: '',
+            rules: {ENG: [], SPA: []},
+            size: {ENG: '', SPA: ''},
+            intro: {ENG: [], SPA: []},
+            description: {ENG: [], SPA: []},
             gallery: [],
-            media: []
+            media: [],
         })
     }
 }
