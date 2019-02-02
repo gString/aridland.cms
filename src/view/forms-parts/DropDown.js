@@ -2,7 +2,7 @@ import React from 'react';
 import { Field } from "formik";
 
 const DropDown = ({ field, form, list, label=null, error, area, disable, cssClass }) => {
-    console.log('props', { field, form, label, error, disable, cssClass });
+    // console.log('props', { field, form, label, error, disable, cssClass });
     return <label>
 
         { label && <p>{label}</p>}

@@ -19,8 +19,6 @@ const projectsInit = () => {
     }
 
     projects = dataFaker(5, 3, dataSchema);
-    console.log(JSON.stringify(projects))
-
 }
 
 const getProjects = () => {

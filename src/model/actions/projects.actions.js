@@ -21,7 +21,6 @@ const fetchProjectsSuccess = (items) => ({
 });
 
 export const fetchProjects = () => async dispatch => {
-    console.log('fetchProjects');
     try {
         dispatch(getProjects());
         const response = await getAllProjects();

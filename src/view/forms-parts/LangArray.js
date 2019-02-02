@@ -12,20 +12,19 @@ const languages = [ {
 const LangArray = ({formik, name, label, childLabel, placeholder, cssClass, children}) =>
 <FieldArray
     name={name}
-    render={ arrayHelpers =>
+    render={ () =>
         <fieldset>
             <legend>{label}</legend>
             {languages.map((lang, langIndex) => (
-                <div key={lang.constant+langIndex}>{React.cloneElement(
-                    React.Children.only(children),
-                    {
-                        name: name,
-                        lang: lang.constant,
-                        label: childLabel ?`${childLabel} - ${lang.displayName}` : null,
-                        placeholder: placeholder ? `${placeholder} - ${lang.displayName}` : lang.displayName
-                    }
-                )}</div>
-
+                <React.Fragment key={lang.constant+langIndex}>
+                    {React.cloneElement(
+                        React.Children.only(children),
+                        {
+                            name: `${name}.${lang.constant}`,
+                            label: childLabel ?`${childLabel} - ${lang.displayName}` : null,
+                            placeholder: placeholder ? `${placeholder} - ${lang.displayName}` : lang.displayName
+                        }
+                )}</React.Fragment>
             ))}
         </fieldset>
     }

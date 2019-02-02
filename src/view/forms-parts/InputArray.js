@@ -4,10 +4,9 @@ import {connect, Field, FieldArray} from "formik";
 const InputArray = ({ formik, origin, lang, element }) => {
 
     const name = `${origin}.${lang}`;
-    const target = formik.values.intro[lang];
+    const target = formik.values[origin][lang];
 
     return <FieldArray
-        key={lang}
         name={name}
         render={ arrayHelpers => {
             return (
@@ -15,11 +14,11 @@ const InputArray = ({ formik, origin, lang, element }) => {
                 <fieldset>
                     <legend>{lang} - {name}</legend>
                     {target && target.length > 0 ? (
-                        target.map((rule, index) => (
+                        target.map((item, index) => (
                             <div key={index}>
                                 <Field
-                                    type={element}
-                                    component={element}
+                                    type={element ? element : 'text'}
+                                    component={element || undefined}
                                     name={`${name}.${index}`}
                                 />
                                 <button

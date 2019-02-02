@@ -70,7 +70,6 @@ const entryMaker = ( configObj, id ) => {
     for (const key in configObj) {
         entry[key] = fieldMaker(configObj[key], id);
     }
-    console.log('entry',JSON.stringify(entry))
     return entry;
 };
 
@@ -81,7 +80,6 @@ const dataFaker = ( minLength, lengthRange, configObject ) => {
         const id = uniqid();
         data[id] = entryMaker(configObject, id);
     }
-    console.log('data',data)
     return data;
 };
 

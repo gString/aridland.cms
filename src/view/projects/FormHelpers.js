@@ -1,7 +1,6 @@
 import * as Yup from "yup";
 
 export const formInitValues = project => {
-    console.log('formInitValues', project)
     if (project) {
         return ({
             name: {

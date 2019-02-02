@@ -21,7 +21,6 @@ const fetchCountriesSuccess = (items) => ({
 });
 
 export const fetchCountries = () => async dispatch => {
-    console.log('fetchCountries');
     try {
         dispatch(getCountries());
         const response = await getAllCountries();

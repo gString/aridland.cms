@@ -7,9 +7,7 @@ import {compose} from "recompose";
 import TextField from "../forms-parts/TextField";
 import DropDown from "../forms-parts/DropDown";
 import {countriesAsArraySelector, currentProjectSelector} from "../../model/selectors";
-import InputList from "../forms-parts/InputList";
 import {formInitValues, formSchema} from './FormHelpers'
-import LanguageDupe from "../forms-parts/LanguageDupe";
 import LangArray from "../forms-parts/LangArray";
 import InputArray from "../forms-parts/InputArray";
 
@@ -68,32 +66,27 @@ const ProjectEditForm = enhanced((props ) => {console.log('ProjectEditForm',prop
                                   isSubmitting
                               } = props;return (
         <Form>
-{/*
-            <LanguageDupe
+            {/* Name */}
+            <LangArray
                 name='name'
                 label='Project Name'
             >
                 <Field
                     component={TextField}
-                    placeholder='placeholder'
-                    values={values}
+                    placeholder='Project name'
                 />
-            </LanguageDupe>
-*/}
+            </LangArray>
 
-{/*
-            <LanguageDupe
+            {/* Country */}
+            <Field
                 name='country'
                 label='Country'
-            >
-                <Field
-                    component={DropDown}
-                    list={countries}
-                />
-            </LanguageDupe>
-*/}
-{/*
-            <LanguageDupe
+                component={DropDown}
+                list={countries}
+            />
+
+            {/* Province */}
+            <LangArray
                 name='province'
                 label='Location'
                 placeholder='Location (province, town)'
@@ -102,45 +95,31 @@ const ProjectEditForm = enhanced((props ) => {console.log('ProjectEditForm',prop
                     component={TextField}
 
                 />
-            </LanguageDupe>
-*/}
-{/*
-            <LangArray
-                name='rules'
-                label='Rules'
-            >
-                <InputList/>
             </LangArray>
-*/}
-{/*
-            <LanguageDupe
+
+            {/* Rules */}
+            {
+                languages.map( (lang, _index) => {
+                    return <InputArray
+                        key={lang.constant}
+                        origin='rules'
+                        lang={lang.constant}
+                    />})
+            }
+
+            {/* Size */}
+            <LangArray
                 name='size'
-                placeholder='Size of project'
                 label='Size'
+                placeholder='Project size'
             >
                 <Field
                     component={TextField}
-                />
-            </LanguageDupe>
-*/}
 
-{/*
-                <InputList
-                    name='introENG'
-                    purename='intro'
-                    childLabel='Short Introduction'
-                    element='textarea'
-                    lang='ENG'
                 />
-                <InputList
-                    name='introSPA'
-                    purename='intro'
-                    childLabel='Short Introduction'
-                    element='textarea'
-                    lang='SPA'
-                />
-*/}
+            </LangArray>
 
+            {/* Intro */}
             {
                 languages.map( (lang, _index) => {
                     return <InputArray
@@ -151,42 +130,16 @@ const ProjectEditForm = enhanced((props ) => {console.log('ProjectEditForm',prop
                     />})
             }
 
-
-
-            {/*
-
-            {languages.map((lang, langIndex) => (
-                <InputList
-                    key={langIndex}
-                    name='intro'
-                    lang={lang.constant}
-                    label={`Short introduction - ${lang.displayName}`}
-                    placeholder={lang.displayName}
-                    element='textarea'
-                />
-            ))}
-
-*/}
-{/*
-            <LangArray
-                name='intro'
-                childLabel='Short Introduction'
-
-            >
-                <InputList
-                    element='textarea'
-                />
-            </LangArray>
-*/}
-
-
-{/*
-            <InputList
-                name='description'
-                label='Detailed Description'
-                element='textarea'
-            />
-*/}
+            {/* Description */}
+            {
+                languages.map( (lang, _index) => {
+                    return <InputArray
+                        key={lang.constant}
+                        origin='intro'
+                        lang={lang.constant}
+                        element={'textarea'}
+                    />})
+            }
         </Form>
     )}
 );
